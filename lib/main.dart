@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      debugShowMaterialGrid: false,
       title: 'Weather App',
       theme: ThemeData(
         iconTheme:const  IconThemeData(
