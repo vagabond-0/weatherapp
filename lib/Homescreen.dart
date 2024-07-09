@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weatherapp/bloc/weather_bloc.dart';
 
 class Homescreen extends StatelessWidget {
-  const Homescreen({super.key});
+  const Homescreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,178 +11,83 @@ class Homescreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
-          child: Column(
-            children: [
-              const Row(
+          child: BlocBuilder<WeatherBloc, WeatherState>(
+            builder: (context, state) {
+              return Column(
                 children: [
-                  Icon(Icons.location_on),
-                  Text("Kanhangad"),
-                ],
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                "27 c",
-                style: TextStyle(
-                  fontSize: 80,
-                ),
-              ),
-              Image.asset("public/cloudy.webp", height: 400, width: 400),
-              const SizedBox(height: 40),
-              const Center(
-                child: Text(
-                  "27th Friday 2023"
-                ,style: TextStyle(
-                  fontSize: 20
-                ),),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.grey,
-                          width: 2.0), // Adjust the color and width as needed
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Adjust the radius as needed
-                      color: Colors.transparent, // Set the background color here
-                    ),
-                    width: 70,
-                    padding: const EdgeInsets.all(20.0),
-                    child: const Center(
-                        child: Text('25',
-                            style: TextStyle(color: Colors.white))),
+                  Row(
+                    children: [
+                      Icon(Icons.location_on),
+                      Text("Kanhangad"),
+                    ],
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.grey,
-                          width: 2.0), // Adjust the color and width as needed
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Adjust the radius as needed
-                      color: Colors.transparent, // Set the background color here
+                  SizedBox(height: 20),
+                  Text(
+                    "27 c",
+                    style: TextStyle(
+                      fontSize: 80,
                     ),
-                    width: 70,
-                    padding: const EdgeInsets.all(20.0),
-                    child: const Center(
-                        child: Text('26',
-                            style: TextStyle(color: Colors.white))),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.grey,
-                          width: 2.0), // Adjust the color and width as needed
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Adjust the radius as needed
-                      color: Colors.transparent, // Set the background color here
+                  Image.asset("public/cloudy.webp", height: 400, width: 400),
+                  SizedBox(height: 40),
+                  Center(
+                    child: Text(
+                      "27th Friday 2023",
+                      style: TextStyle(fontSize: 20),
                     ),
-                    width: 70,
-                    padding: const EdgeInsets.all(20.0),
-                    child: const Center(
-                        child: Text('28',
-                            style: TextStyle(color: Colors.white))),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.grey,
-                          width: 2.0), // Adjust the color and width as needed
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Adjust the radius as needed
-                      color: Colors.transparent, // Set the background color here
-                    ),
-                    width: 70,
-                    padding: const EdgeInsets.all(20.0),
-                    child: const Center(
-                        child: Text('29',
-                            style: TextStyle(color: Colors.white))),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      buildContainer('25'),
+                      buildContainer('26'),
+                      buildContainer('28'),
+                      buildContainer('29'),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      buildContainer('25', width: 180, height: 60),
+                      buildContainer('26', width: 180),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      buildContainer('25', width: 180, height: 60),
+                      buildContainer('26', width: 180),
+                    ],
                   ),
                 ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.grey,
-                          width: 2.0), // Adjust the color and width as needed
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Adjust the radius as needed
-                      color: Colors.transparent, // Set the background color here
-                    ),
-                    width: 180,
-                    height: 60,
-                    padding: const EdgeInsets.all(20.0),
-                    child: const Center(
-                        child: Text('25',
-                            style: TextStyle(color: Colors.white))),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.grey,
-                          width: 2.0), // Adjust the color and width as needed
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Adjust the radius as needed
-                      color: Colors.transparent, // Set the background color here
-                    ),
-                    width: 180,
-                    padding: const EdgeInsets.all(20.0),
-                    child: const Center(
-                        child: Text('26',
-                            style: TextStyle(color: Colors.white))),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.grey,
-                          width: 2.0), // Adjust the color and width as needed
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Adjust the radius as needed
-                      color: Colors.transparent, // Set the background color here
-                    ),
-                    width: 180,
-                    height: 60,
-                    padding: const EdgeInsets.all(20.0),
-                    child: const Center(
-                        child: Text('25',
-                            style: TextStyle(color: Colors.white))),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.grey,
-                          width: 2.0), // Adjust the color and width as needed
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Adjust the radius as needed
-                      color: Colors.transparent, // Set the background color here
-                    ),
-                    width: 180,
-                    padding: const EdgeInsets.all(20.0),
-                    child: const Center(
-                        child: Text('26',
-                            style: TextStyle(color: Colors.white))),
-                  ),
-                ],
-              ),
-            ],
+              );
+            },
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildContainer(String text, {double width = 70, double height = 60}) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.grey,
+          width: 2.0,
+        ),
+        borderRadius: BorderRadius.circular(10.0),
+        color: Colors.transparent,
+      ),
+      width: width,
+      height: height,
+      padding: const EdgeInsets.all(20.0),
+      child: Center(
+        child: Text(
+          text,
+          style: TextStyle(color: Colors.white),
         ),
       ),
     );
