@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:weatherapp/bloc/weather_bloc.dart';
 
 class Homescreen extends StatelessWidget {
@@ -12,27 +13,35 @@ class Homescreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(18.0),
           child: BlocBuilder<WeatherBloc, WeatherState>(
+
             builder: (context, state) {
+              if(state is WeatherSuccess){
+
+              
               return Column(
                 children: [
                   Row(
                     children: [
                       Icon(Icons.location_on),
-                      Text("Kanhangad"),
+                      Text('${state.weather.areaName}'),
                     ],
                   ),
                   SizedBox(height: 20),
                   Text(
-                    "27 c",
+                    '${state.weather.temperature!.celsius!.round()}°c',
                     style: TextStyle(
                       fontSize: 80,
                     ),
+                  ),
+                  Text(
+                    'Max : ${state.weather.tempMax!.celsius!.round()}°c  Min : ${state.weather.tempMin!.celsius!.round()}°c',
+                   
                   ),
                   Image.asset("public/cloudy.webp", height: 400, width: 400),
                   SizedBox(height: 40),
                   Center(
                     child: Text(
-                      "27th Friday 2023",
+                      DateFormat('EEEE dd .').add_jm().format(state.weather.date!),
                       style: TextStyle(fontSize: 20),
                     ),
                   ),
@@ -50,21 +59,57 @@ class Homescreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      buildContainer('25', width: 180, height: 60),
-                      buildContainer('26', width: 180),
+                      Container(
+                        width: 180,
+                         height: 60,
+                         child: Row(children: [
+                          Image.asset("public/cloudy.webp", height: 40, width: 40),
+                          Text('${state.weather.sunrise?.hour}:${state.weather.sunrise?.minute} ')
+                         ],
+                         )
+                         ,),
+                      Container(
+                        width: 180,
+                         height: 60,
+                         child: Row(children: [
+                          Image.asset("public/cloudy.webp", height: 40, width: 40),
+                          Text('${state.weather.sunset?.hour}:${state.weather.sunset?.minute}')
+                         ],
+                         )
+                         ,),
                     ],
                   ),
                   SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      buildContainer('25', width: 180, height: 60),
-                      buildContainer('26', width: 180),
+                      Container(
+                        width: 180,
+                         height: 60,
+                         child: Row(children: [
+                          Image.asset("public/cloudy.webp", height: 40, width: 40),
+                          Text('${state.weather.humidity}')
+                         ],
+                         )
+                         ,),
+                      Container(
+                        width: 180,
+                         height: 60,
+                         child: Row(children: [
+                          Image.asset("public/cloudy.webp", height: 40, width: 40),
+                          Text('${state.weather.cloudiness}')
+                         ],
+                         )
+                         ,),
                     ],
                   ),
                 ],
               );
-            },
+              }else{
+                return Container();
+              }
+            }
+  
           ),
         ),
       ),
