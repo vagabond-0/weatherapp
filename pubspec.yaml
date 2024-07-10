@@ -67,7 +67,15 @@ flutter:
   assets:
     - public/cloudy.webp
     - public/sun.png
-
+    - public/thunderstorm.png
+    - public/Dizzle.png
+    - public/Rain.png
+    - public/snow.png
+    - public/atmosphere.png
+    - public/clouds.png
+    - public/clouds.png
+    - public/sunset.png
+    - public/humidity.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

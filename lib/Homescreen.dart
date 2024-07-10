@@ -6,6 +6,35 @@ import 'package:weatherapp/bloc/weather_bloc.dart';
 class Homescreen extends StatelessWidget {
   const Homescreen({Key? key}) : super(key: key);
 
+
+  Widget getweathericon(int code){
+      switch(code){
+        case >200 && <=300 :
+          return Image.asset(
+            'public/thunderstorm.png'
+          );
+        
+        case >300 && <=400:
+          return Image.asset('public/Dizzle.png',width: 300,height: 300,);
+        
+        case >500 && <=600:
+          return Image.asset('public/Rain.png',width: 300,height: 300,);
+        
+        case >600 && <=700:
+          return Image.asset('public/snow.png',width: 300,height: 300,);
+        
+        case > 700 && <= 800:
+          return Image.asset("public/atmosphere.png",width: 300,height: 300,);
+        
+        case > 800 && <= 900:
+          return Image.asset("public/clouds.png",width: 300,height: 300,);
+        
+        default:
+          return Image.asset("public/clouds.png",width: 300,height: 300,);
+        
+      }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +66,10 @@ class Homescreen extends StatelessWidget {
                     'Max : ${state.weather.tempMax!.celsius!.round()}°c  Min : ${state.weather.tempMin!.celsius!.round()}°c',
                    
                   ),
-                  Image.asset("public/cloudy.webp", height: 400, width: 400),
+                  getweathericon(state.weather.weatherConditionCode!),
+                  Center(
+                    child: Text("${state.weather.weatherDescription!}"),
+                  ),
                   SizedBox(height: 40),
                   Center(
                     child: Text(
@@ -46,15 +78,7 @@ class Homescreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      buildContainer('25'),
-                      buildContainer('26'),
-                      buildContainer('28'),
-                      buildContainer('29'),
-                    ],
-                  ),
+                  
                   SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -62,8 +86,10 @@ class Homescreen extends StatelessWidget {
                       Container(
                         width: 180,
                          height: 60,
-                         child: Row(children: [
-                          Image.asset("public/cloudy.webp", height: 40, width: 40),
+                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                          Image.asset("public/sun.png", height: 40, width: 40),
                           Text('${state.weather.sunrise?.hour}:${state.weather.sunrise?.minute} ')
                          ],
                          )
@@ -71,7 +97,10 @@ class Homescreen extends StatelessWidget {
                       Container(
                         width: 180,
                          height: 60,
-                         child: Row(children: [
+                         child: Row(
+                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children:
+                          [
                           Image.asset("public/cloudy.webp", height: 40, width: 40),
                           Text('${state.weather.sunset?.hour}:${state.weather.sunset?.minute}')
                          ],
@@ -86,7 +115,9 @@ class Homescreen extends StatelessWidget {
                       Container(
                         width: 180,
                          height: 60,
-                         child: Row(children: [
+                         child: Row(
+                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
                           Image.asset("public/cloudy.webp", height: 40, width: 40),
                           Text('${state.weather.humidity}')
                          ],
@@ -95,7 +126,9 @@ class Homescreen extends StatelessWidget {
                       Container(
                         width: 180,
                          height: 60,
-                         child: Row(children: [
+                         child: Row(
+                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
                           Image.asset("public/cloudy.webp", height: 40, width: 40),
                           Text('${state.weather.cloudiness}')
                          ],
